@@ -11,7 +11,7 @@ import QuoteSection from "./components/QuoteSection";
 import ContactSection from "./components/ContactSection";
 import BackToTop from "./components/BackToTop";
 import Footer from "./components/Footer";
-////hellooo/////
+////hellooo///////
 function App() {
    const isAdminPage = window.location.pathname === "/admin";
 
