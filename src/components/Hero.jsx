@@ -1,17 +1,38 @@
 import { ArrowRight, Play } from "lucide-react";
-
+import hero from "../assets/hero-image.png"
+import heroDesktop from "../assets/hero-desktop.png";
+import heroMobile from "../assets/hero-mobile.png";
 function Hero() {
   return (
     <section className="hero" id="home">
 
       {/* Background Image */}
-      <div className="hero-image">
+      {/* <div className="hero-image">
         <img
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=90"
           alt="Modern residential architecture"
         />
-      </div>
+      </div> */}
+      {/* <div className="hero-image">
+        <img
+          src={hero}
+          alt="Modern residential architecture"
+        />
+      </div> */}
 
+      <div className="hero-image">
+        <picture>
+          <source
+            media="(max-width: 850px)"
+            srcSet={heroMobile}
+          />
+
+          <img
+            src={heroDesktop}
+            alt="Radha Constructions"
+          />
+        </picture>
+      </div>
       {/* Dark Overlay */}
       <div className="hero-overlay"></div>
 

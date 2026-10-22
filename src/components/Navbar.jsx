@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-
+import logo from "../assets/logo.png";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -20,7 +20,7 @@ function Navbar() {
       <div className="navbar-container">
 
         {/* Logo */}
-        <a href="#home" className="navbar-logo">
+        {/* <a href="#home" className="navbar-logo">
           <div className="logo-mark">
             RC
           </div>
@@ -29,8 +29,15 @@ function Navbar() {
             <span className="logo-name">RADHA</span>
             <span className="logo-subtitle">CONSTRUCTIONS</span>
           </div>
+        </a> */}
+        <a href="#home" className="navbar-logo">
+          <img
+            src={logo}
+            alt="Radha Constructions"
+            className="navbar-logo-image"
+          />
+         
         </a>
-
         {/* Desktop Navigation */}
         <nav className="desktop-nav">
           {navLinks.map((link) => (

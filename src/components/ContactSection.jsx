@@ -53,7 +53,7 @@ function ContactSection() {
             className="contact-info-item"
           >
             <span className="contact-label">EMAIL</span>
-            <strong>info@radhaconstructions.com</strong>
+            <strong>sampathgoudarukala@gmail.com</strong>
           </a>
 
           <div className="contact-info-item">
@@ -68,10 +68,10 @@ function ContactSection() {
             className="contact-info-item"
           >
             <span className="contact-label">INSTAGRAM</span>
-            <strong>@radha.constructions</strong>
+            <strong>radha.constructions</strong>
           </a>
  <a
-    href="https://wa.me/919848851442"
+    href="https://wa.me/919848851443"
     target="_blank"
     rel="noreferrer"
     className="contact-info-item"
