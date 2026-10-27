@@ -14,11 +14,17 @@ router.post("/", upload.array("files", 10), async (req, res) => {
     const enquiryData = {
       ...req.body,
 
+      // files: (req.files || []).map((file) => ({
+      //   name: file.originalname,
+      //   url: `/uploads/${file.filename}`,
+      //   type: file.mimetype,
+      //   size: file.size,
+      // })),
       files: (req.files || []).map((file) => ({
         name: file.originalname,
-        url: `/uploads/${file.filename}`,
+        url: file.path,
         type: file.mimetype,
-        size: file.size,
+        size: file.size || 0,
       })),
     };
 

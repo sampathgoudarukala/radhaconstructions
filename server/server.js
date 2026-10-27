@@ -1,14 +1,16 @@
+
+const dotenv = require("dotenv");
+
+// Load environment variables BEFORE importing routes or upload modules
+dotenv.config();
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const enquiryRoutes = require("./routes/enquiryRoutes");
 
-dotenv.config();
-
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
 // Connect MongoDB
@@ -18,6 +20,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+// Existing local uploads route (kept for compatibility)
 app.use(
   "/uploads",
   express.static(path.join(__dirname, "upload/files"))
@@ -35,10 +38,6 @@ app.get("/", (req, res) => {
 });
 
 // Start server
-// app.listen(PORT, () => {
-//   console.log(`Radha Constructions API running on port ${PORT}`);
-// });
-
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Radha Constructions API running on port ${PORT}`);
 });

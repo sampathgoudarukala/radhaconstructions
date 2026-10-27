@@ -125,13 +125,29 @@ function AdminDashboard() {
     setSelectedEnquiry(null);
   };
 
+
   const getFileUrl = (fileUrl) => {
     if (!fileUrl) {
-      return "#";
+      return "";
     }
 
-    return `http://localhost:5000${fileUrl}`;
+    // Cloudinary URLs are already complete.
+    if (/^https?:\/\//i.test(fileUrl)) {
+      return fileUrl;
+    }
+
+    // Keep compatibility with older locally stored files.
+    return `http://localhost:5000${fileUrl.startsWith("/") ? "" : "/"}${fileUrl}`;
   };
+
+
+  // const getFileUrl = (fileUrl) => {
+  //   if (!fileUrl) {
+  //     return "#";
+  //   }
+
+  //   return `http://localhost:5000${fileUrl}`;
+  // };
 
   const updateStatus = async (newStatus) => {
     if (!selectedEnquiry) {
@@ -658,6 +674,8 @@ function AdminDashboard() {
                     </option>
                   </select>
 
+
+
                 </div>
 
               </div>
@@ -724,30 +742,32 @@ function AdminDashboard() {
                   {selectedEnquiry.files.map(
                     (file, index) => (
 
+                      // <a
+                      //   key={`${file.name}-${index}`}
+                      //   href={getFileUrl(file.url)}
+                      //   target="_blank"
+                      //   rel="noreferrer"
+                      //   className="admin-file"
+                      // >
+
                       <a
                         key={`${file.name}-${index}`}
                         href={getFileUrl(file.url)}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="admin-file"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          if (!getFileUrl(file.url)) {
+                            event.preventDefault();
+                          }
+                        }}
                       >
-
                         <div>
-
-                          <strong>
-                            {file.name}
-                          </strong>
-
-                          <span>
-                            {file.type}
-                          </span>
-
+                          <strong>{file.name}</strong>
+                          <span>{file.type}</span>
                         </div>
-
-                        <span>
-                          ↗
-                        </span>
-
+                        <span>⬇ Download</span>
                       </a>
 
                     )

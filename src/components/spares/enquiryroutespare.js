@@ -4,7 +4,11 @@ const upload = require("../upload/upload");
 
 const router = express.Router();
 
+
+// ========================================
 // POST - Create new enquiry with files
+// ========================================
+
 router.post("/", upload.array("files", 10), async (req, res) => {
   try {
     const enquiryData = {
@@ -36,7 +40,10 @@ router.post("/", upload.array("files", 10), async (req, res) => {
 });
 
 
+// ========================================
 // GET - Get all enquiries
+// ========================================
+
 router.get("/", async (req, res) => {
   try {
     const enquiries = await Enquiry.find()
@@ -61,7 +68,43 @@ router.get("/", async (req, res) => {
 });
 
 
+// ========================================
+// GET - Get single enquiry
+// ========================================
+
+router.get("/:id", async (req, res) => {
+  try {
+    const enquiry = await Enquiry.findById(req.params.id);
+
+    if (!enquiry) {
+      return res.status(404).json({
+        success: false,
+        message: "Enquiry not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      enquiry,
+    });
+  } catch (error) {
+    console.error(
+      "Single enquiry fetch error:",
+      error.message
+    );
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to fetch enquiry",
+    });
+  }
+});
+
+
+// ========================================
 // PATCH - Update enquiry status
+// ========================================
+
 router.patch("/:id/status", async (req, res) => {
   try {
     const { status } = req.body;
@@ -115,6 +158,47 @@ router.patch("/:id/status", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Unable to update enquiry status",
+    });
+  }
+});
+
+// PATCH - Update internal enquiry notes
+router.patch("/:id/notes", async (req, res) => {
+  try {
+    const { internalNotes } = req.body;
+
+    const enquiry = await Enquiry.findByIdAndUpdate(
+      req.params.id,
+      {
+        internalNotes: internalNotes || "",
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!enquiry) {
+      return res.status(404).json({
+        success: false,
+        message: "Enquiry not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Internal notes updated successfully",
+      enquiry,
+    });
+  } catch (error) {
+    console.error(
+      "Internal notes update error:",
+      error.message
+    );
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to update internal notes",
     });
   }
 });
