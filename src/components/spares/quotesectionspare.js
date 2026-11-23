@@ -109,7 +109,7 @@ function QuoteSection() {
   //     */
 
   //     const response = await fetch(
-  //       "http://localhost:5000/api/enquiries",
+  //       `${API_BASE}/api/enquiries`,
   //       {
   //         method: "POST",
   //         headers: {
@@ -181,7 +181,7 @@ const handleSubmit = async (event) => {
     });
 
     const response = await fetch(
-      "http://localhost:5000/api/enquiries",
+      `${API_BASE}/api/enquiries`,
       {
         method: "POST",
         body: submissionData,

@@ -10,7 +10,7 @@ function AdminDashboard() {
     const fetchEnquiries = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/enquiries"
+          `${API_BASE}/api/enquiries`
         );
 
         const data = await response.json();
@@ -65,7 +65,7 @@ function AdminDashboard() {
       return "#";
     }
 
-    return `http://localhost:5000${fileUrl}`;
+    return `${API_BASE}${fileUrl}`;
   };
 
   const updateStatus = async (newStatus) => {
@@ -75,7 +75,7 @@ function AdminDashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/enquiries/${selectedEnquiry._id}/status`,
+        `${API_BASE}/api/enquiries/${selectedEnquiry._id}/status`,
         {
           method: "PATCH",
           headers: {

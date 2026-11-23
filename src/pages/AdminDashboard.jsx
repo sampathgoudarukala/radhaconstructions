@@ -10,11 +10,13 @@ function AdminDashboard() {
 
   const [notes, setNotes] = useState("");
   const [savingNotes, setSavingNotes] = useState(false);
+
   useEffect(() => {
     const fetchEnquiries = async () => {
+        const API_BASE = import.meta.env.VITE_API_URL;
       try {
         const response = await fetch(
-          "http://localhost:5000/api/enquiries"
+          `${API_BASE}/api/enquiries`
         );
 
         const data = await response.json();
@@ -99,7 +101,7 @@ function AdminDashboard() {
       setError("");
 
       const response = await fetch(
-        `http://localhost:5000/api/enquiries/${enquiry._id}`
+        `${API_BASE}/api/enquiries/${enquiry._id}`
       );
 
       const data = await response.json();
@@ -137,7 +139,7 @@ function AdminDashboard() {
     }
 
     // Keep compatibility with older locally stored files.
-    return `http://localhost:5000${fileUrl.startsWith("/") ? "" : "/"}${fileUrl}`;
+    return `${API_BASE}${fileUrl.startsWith("/") ? "" : "/"}${fileUrl}`;
   };
 
 
@@ -146,7 +148,7 @@ function AdminDashboard() {
   //     return "#";
   //   }
 
-  //   return `http://localhost:5000${fileUrl}`;
+  //   return `${API_BASE}${fileUrl}`;
   // };
 
   const updateStatus = async (newStatus) => {
@@ -156,7 +158,7 @@ function AdminDashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/enquiries/${selectedEnquiry._id}/status`,
+        `${API_BASE}/api/enquiries/${selectedEnquiry._id}/status`,
         {
           method: "PATCH",
           headers: {
@@ -203,7 +205,7 @@ function AdminDashboard() {
       setSavingNotes(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/enquiries/${selectedEnquiry._id}/notes`,
+        `${API_BASE}/api/enquiries/${selectedEnquiry._id}/notes`,
         {
           method: "PATCH",
           headers: {

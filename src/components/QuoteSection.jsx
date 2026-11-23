@@ -112,7 +112,7 @@ function QuoteSection() {
       });
 
       const response = await fetch(
-        "http://localhost:5000/api/enquiries",
+        `${import.meta.env.VITE_API_URL}/api/enquiries`,
         {
           method: "POST",
           body: submissionData,
